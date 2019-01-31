@@ -1,0 +1,25 @@
+Author: Sauparna Palchowdhury
+Emai  : sauparna.palc@gmail.com
+
+Tokenize the corpus and query.
+
+    ./raw2t -x -n -c TRECQUERY <q.txt >q.t
+    ./raw2t -x -n -c TREC <d.txt >d.t
+
+Print readable tokenized files (if needed).
+
+    ./t2mem <q.t >q.mem
+    ./t2mem <d.t >d.mem
+
+Build inverted index from tokenized corpus and search (-s) using
+queries.
+
+    ./ii -s q.t <d.t >res
+
+Rank the search result.
+
+    sort -k1,1 -k3,3nr res >rank
+
+Convert the result to TREC run format.
+
+    awk -f txt2trecrun.awk <rank >run
